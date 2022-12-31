@@ -1,0 +1,32 @@
+SepNot SepDiff(Sep& Sa,Sep& Sb){
+  Function f1 ("p[2]", "a[2]", "(p[0] + a[0], p[1] + a[1])");
+  Function f2("p[2]", "a[2]", "(a[0], a[1])");
+
+  SepNot sep_notB (Sb);
+  SepInverse sep_invnotB (sep_notB, f1);
+  SepInverse sep_invA (Sa, f2);
+
+  IntervalVector y_init {{-oo,oo},{-oo,oo}};
+
+  SepInter sep2 (sep_invnotB , sep_invA);
+
+
+  SepProj sep_bis (sep2, pos, 0.001);
+  SepNot sep (sep_bis);
+  return sep;
+}
+    
+SepProj SepSum(SepTransform& Sa,SepPolarXY& Sb){
+  Function f1 ("p[2]", "a[2]", "(p[0] - a[0], p[1] - a[1])");
+  Function f2("p[2]", "a[2]", "(a[0], a[1])");
+
+  SepInverse sep_invB (Sb, f1);
+  SepInverse sep_invA (Sa, f2);
+
+  SepInter sep2 (sep_invB , sep_invA);
+
+  IntervalVector y_init {{-oo,oo},{-oo,oo}};
+
+  SepProj sep(sep2, y_init, 0.001);
+  return sep;
+}
