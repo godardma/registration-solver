@@ -72,6 +72,6 @@ Par la suite, il suffira de make
 
 4. Lancer l'executable
 ```bash
-./path_valid
+./codac_basics_01
 ```
 
